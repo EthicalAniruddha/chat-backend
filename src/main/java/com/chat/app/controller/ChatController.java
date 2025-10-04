@@ -6,7 +6,6 @@ import org.springframework.stereotype.Controller;
 
 import com.chat.app.model.ChatMessage;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 
 @Controller
@@ -22,6 +21,4 @@ public class ChatController {
     public String chat() {
         return "chat";
     }
-    
-
 }
