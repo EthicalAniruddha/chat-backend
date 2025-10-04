@@ -1,26 +1,35 @@
-# Stage 1: Build
+# Stage 1: Build the Spring Boot app
 FROM eclipse-temurin:17-jdk-focal AS builder
+
+# Set workdir
 WORKDIR /app
 
-# Copy Maven wrapper and project files
+# Copy Maven wrapper if you have it (optional)
 COPY mvnw .
-COPY mvnw.cmd .
 COPY .mvn .mvn
+
+# Copy pom first to leverage Docker cache
 COPY pom.xml .
+
+# Copy source code
 COPY src src
 
-# Build JAR
-RUN chmod +x mvnw && ./mvnw clean package -DskipTests
+# Make mvnw executable (if using wrapper)
+RUN chmod +x mvnw
 
-# Stage 2: Runtime
+# Build the JAR without running tests
+RUN ./mvnw clean package -DskipTests
+
+# Stage 2: Create lightweight runtime image
 FROM eclipse-temurin:17-jre-focal
+
 WORKDIR /app
 
-# Copy JAR from builder
-COPY --from=builder /app/target/app-0.0.1-SNAPSHOT.jar app.jar
+# Copy the built jar from the builder stage
+COPY --from=builder /app/target/*.jar app.jar
 
-# Expose port 8080
+# Expose Render default port 8080
 EXPOSE 8080
 
-# Run the app
-ENTRYPOINT ["java","-jar","app.jar"]
+# Command to run the app
+ENTRYPOINT ["java", "-jar", "app.jar"]
