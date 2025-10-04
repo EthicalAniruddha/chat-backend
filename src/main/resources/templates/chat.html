@@ -26,9 +26,9 @@
     </div>
 </div>
 
-<!-- Load SockJS and STOMP UMD bundle AFTER the body -->
+<!-- Load SockJS and STOMP (version 6.x for browser global) -->
 <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1.6.1/dist/sockjs.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@stomp/stompjs@7.2.0/bundles/stomp.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@stomp/stompjs@6.1.2/umd/stomp.min.js"></script>
 
 <script>
 let stompClient = null;
@@ -40,8 +40,8 @@ function setConnected(connected) {
 }
 
 function connect() {
-    const socket = new SockJS('/chat'); // Make sure your Spring WebSocket endpoint matches
-    stompClient = Stomp.Stomp.over(socket); // ✅ Correct UMD usage
+    const socket = new SockJS('/chat'); // Match your Spring endpoint
+    stompClient = Stomp.over(socket);   // Works in browser now
 
     stompClient.connect({}, frame => {
         console.log('Connected: ' + frame);
@@ -65,7 +65,7 @@ function showMessage(message) {
 }
 
 function sendMessage() {
-    if (!stompClient) return; // make sure stompClient is ready
+    if (!stompClient) return;
     const sender = document.getElementById('senderInput').value.trim();
     const content = document.getElementById('messageInput').value.trim();
     if (!sender || !content) return;
@@ -75,10 +75,9 @@ function sendMessage() {
     document.getElementById('messageInput').value = '';
 }
 
-// Add click listener
 document.getElementById('sendMessage').addEventListener('click', sendMessage);
 
-// Auto-connect when page loads
+// Auto-connect on page load
 window.addEventListener('load', connect);
 </script>
 </body>
