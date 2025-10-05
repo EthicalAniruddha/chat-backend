@@ -106,15 +106,18 @@ chat-backend/
 │   ├── main/
 │   │   ├── java/
 │   │   │   └── com/
-│   │   │       └── yourpackage/
+│   │   │       └── chat/app/
 │   │   │           ├── config/
 │   │   │           │   └── WebSocketConfig.java
 │   │   │           ├── controller/
+|   |   |           |   └── HomeController.java
 │   │   │           │   └── ChatController.java
 │   │   │           ├── model/
 │   │   │           │   └── ChatMessage.java
-│   │   │           └── ChatBackendApplication.java
+│   │   │           └── AppApplication.java
 │   │   └── resources/
+|   |       |── templates/
+            |      └── chat.html
 │   │       └── application.properties
 │   └── test/
 ├── pom.xml
