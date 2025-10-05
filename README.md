@@ -117,7 +117,7 @@ chat-backend/
 │   │   │           └── AppApplication.java
 │   │   └── resources/
 |   |       |── templates/
-            |      └── chat.html
+|   |       |      └── chat.html
 │   │       └── application.properties
 │   └── test/
 ├── pom.xml
