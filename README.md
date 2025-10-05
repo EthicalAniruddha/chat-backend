@@ -42,7 +42,7 @@ Before running this application, make sure you have:
 
 The application will start on `http://localhost:8080` by default.
 
-4. **Here is the app link: ** `https://chat-backend-ln0x.onrender.com/` if you are lucky it will be live
+4. **Here is the app link:** `https://chat-backend-ln0x.onrender.com/` if you are lucky it will be live
 
 ## 📡 API Endpoints
 
